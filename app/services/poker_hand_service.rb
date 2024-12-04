@@ -31,7 +31,7 @@ module PokerHand
     end
   end
 
-  class Checker
+  class Analyzer
     VALUE_OF_HANDS_MAPPING = {
       9 => "Straight flush",
       8 => "Four of a kind",
