@@ -1,4 +1,4 @@
-module PokerHand
+module PokerHandService
   class Card
     VALID_SUITS = {
       "C" => 0,
