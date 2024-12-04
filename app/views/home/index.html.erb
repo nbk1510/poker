@@ -1,0 +1,6 @@
+<%= form_with url: "/check", method: :post, data: {turbo: false} do |form| %>
+  <%= form.label :lbl, "Input card hand:" %>
+  <%= form.search_field :hand, value: params[:hand] %>
+  <%= form.submit "Check" %>
+<% end %>
+<%= render :partial => "home/poker_result", locals: { poker_result: @poker_result} %>
