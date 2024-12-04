@@ -72,17 +72,33 @@ module PokerHand
         if errors.present?
           output_data["error"] << errors
         else
-          output_data["result"] << check_for_hand(cards)
+          poker_hand = check_for_hand(cards)
+          hand_value = VALUE_OF_HANDS_MAPPING.key(poker_hand)
+          data = { 
+            "card"  => hand,
+            "hand"  => poker_hand,
+            "best"  => false,
+            "value" => hand_value
+          }
+          output_data["result"] << data
         end
       end
+      
+      if output_data["result"].present?
+        best_hand = output_data["result"].detect do |result|
+          result["card"] == output_data["result"].max_by{|e| e["value"]}["card"]
+        end
+        best_hand["best"] = true
+      end
 
+      # hands_with_poker_data = @hands_data.map{|e|  }
       output_data
     end
 
     def validate_hand(cards, hand)
       errors = {}
       msg = ""
-      msg << "Number of cards in hand is invalid. " if cards.count != 5
+      msg << "The number of cards must be 5. " if cards.count != 5
       cards.each_with_index do |card, i|
         msg << "The #{(i + 1).ordinalize} card is invalid (#{card.card}). " if !card.valid?
       end
@@ -105,9 +121,6 @@ module PokerHand
       three_of_kind_count = tally_h.values.count(3)
       four_of_kind_count = tally_h.values.count(4)
 
-      # p "tally"
-      # p tally_h
-      # byebug
       if has_straight && has_flush
         VALUE_OF_HANDS_MAPPING[9]
       elsif four_of_kind_count == 1
@@ -159,15 +172,15 @@ module PokerHand
       result_flag
     end
 
-    def pair_count(number_sorted_cards)
-      # example of two pairs: { 2 => 2, 3 => 2 } 
-      tally_h = number_sorted_cards.map{ |e| e.number }.tally
+    # def pair_count(number_sorted_cards)
+    #   # example of two pairs: { 2 => 2, 3 => 2 } 
+    #   tally_h = number_sorted_cards.map{ |e| e.number }.tally
 
-      pair_count = tally_h.count(2)
-      three_of_kind_count = tally_h.count(3)
-      four_of_kind_count = tally_h.count(4)
+    #   pair_count = tally_h.count(2)
+    #   three_of_kind_count = tally_h.count(3)
+    #   four_of_kind_count = tally_h.count(4)
       
-    end
+    # end
 
   end
 end
