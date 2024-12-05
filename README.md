@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Starting local server command:
+```rails s```
 
-Things you may want to cover:
+Example data for web input: 
+```
+C7 C6 C5 C4 C8
+```
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Example cURL request for API:
+```
+curl --location 'localhost:3000/api/v1/cards/check' \
+--header 'Content-Type: application/json' \
+--data '{
+    	"cards": [
+    			  "H9 H13 H12 H11 H10",
+    			  "H9 C9 S9 H2 C2",
+                  "C13 D12 C11 H8 H7"
+    	]
+    }
+```
