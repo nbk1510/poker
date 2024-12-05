@@ -1,0 +1,29 @@
+AllCops:
+  Exclude:
+    - 'bin/**'
+
+Layout/LineLength:
+  Max: 150
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/ClassLength:
+  Max: 150
+
+Metrics/MethodLength:
+  Max: 50
+
+Metrics/AbcSize:
+  Max: 35
+  
+Style/Documentation:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Max: 15
+
+Metrics/PerceivedComplexity:
+  Max: 15
+
+
