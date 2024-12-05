@@ -7,7 +7,7 @@ RSpec.describe "/api", type: :request do
       let(:params) { 
         {
           "cards": [
-            "H9 H13 H12 H11 H10",
+            "H1 H13 H12 H11 H10",
             "H9 C9 S9 H2 C2",
             "C13 D12 C11 H8 H7"
           ]
@@ -19,9 +19,9 @@ RSpec.describe "/api", type: :request do
 
         expected_result = {
           "result" => [
-            {"card" => "H9 H13 H12 H11 H10", "hand" => "Straight flush", "best" => true, "value" => 9},
-            {"card" => "H9 C9 S9 H2 C2", "hand" => "Full house", "best" => false, "value" => 7},
-            {"card" => "C13 D12 C11 H8 H7", "hand" => "High card", "best" => false, "value" => 1}],
+            {"card" => "H1 H13 H12 H11 H10", "hand" => "Straight flush", "best" => true},
+            {"card" => "H9 C9 S9 H2 C2", "hand" => "Full house", "best" => false},
+            {"card" => "C13 D12 C11 H8 H7", "hand" => "High card", "best" => false}],
           "error"=>[]
         }
         expect(response).to be_successful
@@ -33,7 +33,7 @@ RSpec.describe "/api", type: :request do
       let(:params) { 
         {
           "cards": [
-            "H9 H13 H12 H11 H10",
+            "H1 H13 H12 H11 H10",
             "H9 C9 S9 X2 C2",
             "C13 D12"
           ]
@@ -45,7 +45,7 @@ RSpec.describe "/api", type: :request do
 
         expected_result = {
           "result" => [
-            {"card" => "H9 H13 H12 H11 H10", "hand" => "Straight flush", "best" => true, "value" => 9}
+            {"card" => "H1 H13 H12 H11 H10", "hand" => "Straight flush", "best" => true}
           ],
           "error" => [
             {"card" => "H9 C9 S9 X2 C2", "msg" => "The 4th card is invalid (X2). "},

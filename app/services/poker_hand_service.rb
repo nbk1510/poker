@@ -89,11 +89,14 @@ module PokerHandService
           result["card"] == output_data["result"].max_by{|e| e["value"]}["card"]
         end
         best_hand["best"] = true
+        output_data["result"] = output_data["result"].map{|e| e.except("value")}
       end
 
       # hands_with_poker_data = @hands_data.map{|e|  }
       output_data
     end
+
+    private
 
     def validate_hand(cards, hand)
       errors = {}
@@ -143,6 +146,8 @@ module PokerHandService
     end
 
     def has_five_consecutive_number?(number_sorted_cards)
+      return true if number_sorted_cards.map(&:number) == [1, 10, 11, 12, 13] # special case for ace-high straight flush 
+
       result_flag = true
       checking_card = number_sorted_cards.first
 
@@ -171,16 +176,5 @@ module PokerHandService
       end
       result_flag
     end
-
-    # def pair_count(number_sorted_cards)
-    #   # example of two pairs: { 2 => 2, 3 => 2 } 
-    #   tally_h = number_sorted_cards.map{ |e| e.number }.tally
-
-    #   pair_count = tally_h.count(2)
-    #   three_of_kind_count = tally_h.count(3)
-    #   four_of_kind_count = tally_h.count(4)
-      
-    # end
-
   end
 end
