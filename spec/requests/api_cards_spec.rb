@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe '/api', type: :request do
-  describe 'POST /api/v1/analyze' do
+RSpec.describe '/api/v1/cards', type: :request do
+  describe 'POST /api/v1/cards/check' do
     context 'params with valid poker hands' do
       let(:params) do
         {
@@ -14,7 +14,6 @@ RSpec.describe '/api', type: :request do
           ]
         }
       end
-
       let(:headers) { { 'ACCEPT' => 'application/json' } }
       let(:expected_result) do
         {
@@ -44,7 +43,6 @@ RSpec.describe '/api', type: :request do
           ]
         }
       end
-
       let(:headers) { { 'ACCEPT' => 'application/json' } }
       let(:expected_result) do
         {
@@ -57,6 +55,7 @@ RSpec.describe '/api', type: :request do
           ]
         }
       end
+
       before { post '/api/v1/cards/check', params: params, headers: headers }
 
       it 'renders a successful response with correct data' do
