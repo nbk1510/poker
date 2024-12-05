@@ -6,11 +6,23 @@ module Api
       skip_forgery_protection
 
       def check
+        unless cards_params.is_a?(Array)
+          respond_to do |format|
+            format.json { render json: { message: 'Invalid input format.' }, status: 422 }
+          end and return
+        end
+
         output = PokerHandService::Analyzer.new(params['cards']).analyze
 
         respond_to do |format|
           format.json { render json: output.to_json }
         end
+      end
+
+      private
+
+      def cards_params
+        params.permit(:cards)
       end
     end
   end
