@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "home#index"
-  post "/api/v1/cards/check", to: "api/v1/cards#check"
   post "/check", to: "home#check"
+
+  post "/api/v1/cards/check", to: "api/v1/cards#check"
 end
