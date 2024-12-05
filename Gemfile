@@ -73,3 +73,4 @@ end
 
 gem "rspec-rails"
 gem "byebug"
+gem "rails-controller-testing"
