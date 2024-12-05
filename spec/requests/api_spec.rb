@@ -14,11 +14,10 @@ RSpec.describe '/api', type: :request do
           ]
         }
       end
-      it 'renders a successful response with correct data' do
-        headers = { 'ACCEPT' => 'application/json' }
-        post '/api/v1/cards/check', params: params, headers: headers
 
-        expected_result = {
+      let(:headers) { { 'ACCEPT' => 'application/json' } }
+      let(:expected_result) do
+        {
           'result' => [
             { 'card' => 'H1 H13 H12 H11 H10', 'hand' => 'Straight flush', 'best' => true },
             { 'card' => 'H9 C9 S9 H2 C2', 'hand' => 'Full house', 'best' => false },
@@ -26,6 +25,10 @@ RSpec.describe '/api', type: :request do
           ],
           'error' => []
         }
+      end
+      before { post '/api/v1/cards/check', params: params, headers: headers }
+
+      it 'renders a successful response with correct data' do
         expect(response).to be_successful
         expect(JSON.parse(response.body)).to eq expected_result
       end
@@ -41,11 +44,10 @@ RSpec.describe '/api', type: :request do
           ]
         }
       end
-      it 'renders a successful response with correct data' do
-        headers = { 'ACCEPT' => 'application/json' }
-        post '/api/v1/cards/check', params: params, headers: headers
 
-        expected_result = {
+      let(:headers) { { 'ACCEPT' => 'application/json' } }
+      let(:expected_result) do
+        {
           'result' => [
             { 'card' => 'H1 H13 H12 H11 H10', 'hand' => 'Straight flush', 'best' => true }
           ],
@@ -54,6 +56,10 @@ RSpec.describe '/api', type: :request do
             { 'card' => 'C13 D12', 'msg' => 'The number of cards must be 5. ' }
           ]
         }
+      end
+      before { post '/api/v1/cards/check', params: params, headers: headers }
+
+      it 'renders a successful response with correct data' do
         expect(response).to be_successful
         expect(JSON.parse(response.body)).to eq expected_result
       end
