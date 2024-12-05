@@ -1,0 +1,8 @@
+<% if poker_result %>
+  <% if poker_result["result"].present? %> 
+  <span>
+    <span><%= poker_result["result"].first["hand"] %></span>
+  <% elsif poker_result["error"].present? %>
+    <span><%= poker_result["error"].first["msg"] %></span>
+  <% end %>
+<% end %>
