@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module PokerHandService
   class Card
     VALID_SUITS = {
