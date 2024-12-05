@@ -22,7 +22,7 @@ module Api
       private
 
       def cards_params
-        params.permit(:cards)
+        params.require(:cards)
       end
     end
   end
